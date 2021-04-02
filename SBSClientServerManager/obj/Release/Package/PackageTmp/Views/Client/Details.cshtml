@@ -1,0 +1,459 @@
+﻿@model SBSClientServerManager.Models.ViewModels.ClientViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+    <script>
+
+            
+
+             function AddServer(clientId) {
+
+
+        
+                var url = "/server/add?clientId=" + clientId;
+
+                $("#AddServerModalBody").load(url, function () {
+                   
+
+                })
+
+             }
+
+
+            function AddSqlServer(clientId) {
+
+                var url = "/sql/add?clientId=" + clientId;
+
+                $("#AddSqlServerModalBody").load(url, function () {
+                    
+
+                })
+            }
+            function AddVpnServer(clientId) {
+
+                var url = "/vpn/add?clientId=" + clientId;
+
+                $("#AddVpnServerModalBody").load(url, function () {
+                    
+
+                })
+            }
+
+            function viewEditServer(serverId) {
+                var url = "/server/edit?id=" + serverId;
+
+                $("#EditServerModalBody").load(url, function () {
+                  
+                })
+
+
+
+            }
+            function viewEditSqlServer(sqlserverId) {
+                var url = "/sql/edit?id=" + sqlserverId;
+
+                $("#EditSqlServerModalBody").load(url, function () {
+                   
+
+                })
+
+
+
+            }
+            function viewEditVpnServer(vpnserverId) {
+                var url = "/vpn/edit?id=" + vpnserverId;
+
+                $("#EditVpnServerModalBody").load(url, function () {
+                    $("#EditVpnServerModal").modal("show");
+
+                })
+
+
+            }
+            function Delete(serverId, clientId) {
+
+                $("#ConfirmDelete").click(function () {
+                    $.ajax('/server/delete', {
+                        type: 'POST',
+                        data: { id: serverId },
+                        success: function () {
+
+                            window.location.href = "/client/details?id=" + clientId;
+                               
+                        }
+                    }
+                    )
+                }
+                )
+            }
+
+            function DeleteSql(sqlserverId, clientId) {
+
+                $("#ConfirmSqlDelete").click(function () {
+                    $.ajax('/sql/delete', {
+                        type: 'POST',
+                        data: { id: sqlserverId },
+                        success: function () {
+                            window.location.href = "/client/details?id=" + clientId;
+                                
+                        }
+                    }
+                    )
+                }
+                )
+            }
+            function DeleteVpn(vpnserverId, clientId) {
+
+                $("#ConfirmVpnDelete").click(function () {
+                    $.ajax('/vpn/delete', {
+                        type: 'POST',
+                        data: { id: vpnserverId },
+                        success: function () {
+                            window.location.href = "/client/details?id=" + clientId;
+                               
+                        }
+                    }
+                    )
+                }
+                )
+
+            }
+
+
+       
+
+
+    </script>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .row {
+            margin-left: -5px;
+            margin-right: -5px;
+        }
+
+        .column {
+            float: left;
+            width: 50%;
+            padding: 5px;
+        }   
+
+        /* Clearfix (clear floats) */
+        .row::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+            width: 100%;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 16px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>@Model.Name</h2>
+
+    <!--Server Modals-->
+    <div>
+
+        <!--Add Server Modal-->
+        <div class="modal fade" id="AddServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">New Server Details</h3>
+
+                    </div>
+                    <div class="modal-body" id="AddServerModalBody">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Edit server Modal-->
+        <div class="modal fade" id="EditServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Edit Server Details</h3>
+
+                    </div>
+                    <div class="modal-body" id="EditServerModalBody">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Delete server Modal-->
+        <div class="modal fade" id="DeleteServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Server Details</h5>
+
+                    </div>
+                    <div class="modal-body" id="DeleteServerModalBody">
+                        <h4>Are you sure you want to Delete this Server Detail form Database?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="ConfirmDelete">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--SQL Server Modals-->
+    <div>
+
+        <!--Add Sql Server Modal-->
+        <div class="modal fade" id="AddSqlServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">New SQL Server Details</h3>
+
+                    </div>
+                    <div class="modal-body" id="AddSqlServerModalBody">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Edit SQL server Modal-->
+        <div class="modal fade" id="EditSqlServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Edit SQL Server Details</h3>
+
+                    </div>
+                    <div class="modal-body" id="EditSqlServerModalBody">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Delete SQl server Modal-->
+        <div class="modal fade" id="DeleteSqlServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete SQL Server Details</h5>
+
+                    </div>
+                    <div class="modal-body" id="DeleteSqlServerModalBody">
+                        <h4>Are you sure you want to Delete this Server Detail form Database?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="ConfirmSqlDelete">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Vpn Server Modals-->
+    <div>
+
+        <!--Add Vpn Server Modal-->
+        <div class="modal fade" id="AddVpnServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">New Vpn Server Details</h3>
+
+                    </div>
+                    <div class="modal-body" id="AddVpnServerModalBody">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Edit Vpn server Modal-->
+        <div class="modal fade" id="EditVpnServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Edit Vpn Server Details</h3>
+
+                    </div>
+                    <div class="modal-body" id="EditVpnServerModalBody">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!--Delete Vpn server Modal-->
+        <div class="modal fade" id="DeleteVpnServerModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Delete Vpn Server Details</h5>
+
+                    </div>
+                    <div class="modal-body" id="DeleteVpnServerModalBody">
+                        <h4>Are you sure you want to Delete this Server Detail form Database?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" id="ConfirmVpnDelete">Yes</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            <h4>SERVER Details</h4>
+            <button class="btn btn-primary" onclick="AddServer(@Model.Id)"data-toggle="modal" data-target="#AddServerModal">Add New Server Details</button>
+
+            @if (Model.Servers.Count() == 0)
+            {
+                <h4>No Sql Server Details Yet</h4>
+                
+            }
+            else
+            {
+                <table>
+                    <tr class="btn-primary">
+                        <th>IP Address</th>
+                        <th>Server Type</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+
+                    @foreach (var server in Model.Servers)
+                    {
+                        <tr>
+                            <td>@server.Ip</td>
+                            <td>@server.ServerTypeName</td>
+                            <td>@server.Username</td>
+                            <td>@server.Password</td>
+                            <td>
+                                <button type="button" onclick="viewEditServer(@server.Id)" class="btn btn-warning" data-toggle="modal" data-target="#EditServerModal">Edit</button>
+                                <button type="button" onclick="Delete(@server.Id,@Model.Id)" class="btn btn-danger" data-toggle="modal" data-target="#DeleteServerModal">x</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+
+        </div>
+
+        <div class="column">
+            <h4>VPN Details</h4>
+            <button class="btn btn-primary" onclick="AddVpnServer(@Model.Id)" data-toggle="modal" data-target="#AddVpnServerModal">Add New VPN Server Details</button>
+
+            @if (Model.Vpns.Count() == 0)
+            {
+                <h4>No Vpn Details Added Yet</h4>
+            }
+            else
+
+            {
+                <table>
+                    <tr class="btn-primary">
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Action</th>
+                    </tr>
+                    @foreach (var vpn in Model.Vpns)
+                    {
+                        <tr>
+                            <td>@vpn.Name</td>
+                            <td>@vpn.Username</td>
+                            <td>@vpn.Password</td>
+                            <td>
+                                <button type="button" onclick="viewEditVpnServer(@vpn.Id)" class="btn btn-warning" data-toggle="modal" data-target="#EditVpnServerModal">Edit</button>
+                                <button type="button" onclick="DeleteVpn(@vpn.Id,@Model.Id)" class="btn btn-danger" data-toggle="modal" data-target="#DeleteVpnServerModal">x</button>
+                            </td>
+                        </tr>
+                    }
+                </table>
+
+            }
+
+
+        </div>
+    </div>
+
+
+
+    <div class="column">
+        <h4>SQL Server Details</h4>
+        <button class="btn btn-primary"  onclick="AddSqlServer(@Model.Id)" data-toggle="modal" data-target="#AddSqlServerModal">Add New Sql Server Details</button>
+
+        @if (Model.SqlServers.Count() == 0)
+        {
+            <h4>No Sql Server Details Yet</h4>
+        }
+        else
+        {
+            <table>
+                <tr class="btn-primary">
+                    <th>Instance Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+                @foreach (var sqlserver in Model.SqlServers)
+                {
+                    <tr>
+                        <td>@sqlserver.InstanceName</td>
+                        <td>@sqlserver.Username</td>
+                        <td>@sqlserver.Password</td>
+                        <td>
+                            <button type="button" onclick="viewEditSqlServer(@sqlserver.Id)" class="btn btn-warning" data-toggle="modal" data-target="#EditSqlServerModal">Edit</button>
+                            <button type="button" onclick="DeleteSql(@sqlserver.Id,@Model.Id)" class="btn btn-danger" data-toggle="modal" data-target="#DeleteSqlServerModal">x</button>
+                        </td>
+                    </tr>
+                }
+            </table>
+
+
+        }
+
+
+    </div>
+
+</body>
+</html>
+
+
+
+

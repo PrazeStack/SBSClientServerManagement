@@ -1,0 +1,51 @@
+﻿@model SBSClientServerManager.Models.ViewModels.ServerFormViewModel
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")"
+        type="text/javascript">
+</script>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")"
+        type="text/javascript">
+</script>
+
+
+@using (Html.BeginForm("Edit", "Server", FormMethod.Post))
+{
+
+    <div class="form-group">
+        <div class="form-group">
+            @Html.LabelFor(s => s.Ip)
+            @Html.TextBoxFor(s => s.Ip, new { @class = "form-control", @Value = Model.Ip })
+            @Html.ValidationMessageFor(s => s.Ip)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Username)
+            @Html.TextBoxFor(s => s.Username, new { @class = "form-control", @Value = Model.Username })
+            @Html.ValidationMessageFor(s => s.Username)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.Password)
+            @Html.TextBoxFor(s => s.Password, new { @class = "form-control", @Value = Model.Password })
+            @Html.ValidationMessageFor(s => s.Password)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(s => s.ServerTypeName)
+            @Html.EnumDropDownListFor(s => s.ServerTypeName, "Select Server Type", new { @class = "form-control", @Value = Model.ServerTypeName })
+            @Html.ValidationMessageFor(s => s.ServerTypeName)
+        </div>
+        <div class="form-group">
+            @Html.HiddenFor(s => s.ClientId)
+            @Html.HiddenFor(s=>s.Id)
+            @Html.AntiForgeryToken()
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Update Server Details</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+
+}
+
+
+    
