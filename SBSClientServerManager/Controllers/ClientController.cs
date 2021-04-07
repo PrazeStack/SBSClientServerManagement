@@ -12,7 +12,7 @@ namespace SBSClientServerManager.Controllers
 {
     public class ClientController : Controller
     {
-
+        
         private ApplicationDbContext _context;
         public ClientController()
         {
@@ -28,9 +28,12 @@ namespace SBSClientServerManager.Controllers
         {
             var clients = _context.Clients.ToList();
             var viewModel = Mapper.Map<List<ClientViewModel>>(clients);
-            return View(viewModel);
+            if (User.IsInRole("CanManageAllClientDetails"))
+                return View("Index", viewModel);
+            return View("ReadOnly-Index",viewModel);
         }
 
+        // Get: List for Data Tables
         public ActionResult GetClientList()
         {
             var clients = _context.Clients.ToList();
@@ -64,7 +67,7 @@ namespace SBSClientServerManager.Controllers
         [HttpPost]
         public ActionResult Delete(int? id)
         {
-            if (id == 0)
+            if (id == 0|| id == null)
             {
                 return HttpNotFound();
             }
@@ -99,8 +102,10 @@ namespace SBSClientServerManager.Controllers
                 Id = Id
    
             };
-            
-            return View(viewModel);
+            if (User.IsInRole("CanManageAllClientDetails"))
+                return View("Details", viewModel);
+            return View("ReadOnly-Details", viewModel);
+           
 
         }
 
@@ -118,6 +123,12 @@ namespace SBSClientServerManager.Controllers
         [HttpPost]
         public ActionResult Add(ClientFormViewModel clientdata)
         {
+            if (string.IsNullOrEmpty(clientdata.Name))
+            {
+                ModelState.AddModelError("Name", "Name can not be Empty!!");
+                return RedirectToAction("Add", clientdata);
+            }
+
             if (!ModelState.IsValid)
                     return RedirectToAction("Add", clientdata);
                 

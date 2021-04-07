@@ -48,7 +48,16 @@
     <Reference Include="AutoMapper, Version=4.1.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.4.1.0\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -102,9 +111,6 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
@@ -115,12 +121,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.2\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -181,6 +181,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\EncryptionHelper.cs" />
     <Compile Include="Migrations\202103241520387_AddClientTable.cs" />
     <Compile Include="Migrations\202103241520387_AddClientTable.Designer.cs">
       <DependentUpon>202103241520387_AddClientTable.cs</DependentUpon>
@@ -229,6 +230,18 @@
     <Compile Include="Migrations\202103261152331_check.Designer.cs">
       <DependentUpon>202103261152331_check.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104060821359_Enum.cs" />
+    <Compile Include="Migrations\202104060821359_Enum.designer.cs">
+      <DependentUpon>202104060821359_Enum.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104061407598_lates.cs" />
+    <Compile Include="Migrations\202104061407598_lates.designer.cs">
+      <DependentUpon>202104061407598_lates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202104071313527_Userroles.cs" />
+    <Compile Include="Migrations\202104071313527_Userroles.Designer.cs">
+      <DependentUpon>202104071313527_Userroles.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -249,6 +262,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Simplex-Transparent-Logo-e1594025863411.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -264,6 +278,7 @@
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
+    <None Include="Properties\PublishProfiles\AdegbitePraiseSBS-Project1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -320,10 +335,14 @@
     <Content Include="Views\SQL\_EditSqlServer.cshtml" />
     <Content Include="Views\VPN\_AddVpn.cshtml" />
     <Content Include="Views\VPN\_EditVpn.cshtml" />
+    <Content Include="Views\Server\_ViewServer.cshtml" />
+    <Content Include="Views\SQL\_ViewSqlServer.cshtml" />
+    <Content Include="Views\VPN\_ViewVpn.cshtml" />
+    <Content Include="Views\Client\ReadOnly-Index.cshtml" />
+    <Content Include="Views\Client\ReadOnly-Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -373,6 +392,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202103261152331_check.resx">
       <DependentUpon>202103261152331_check.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104060821359_Enum.resx">
+      <DependentUpon>202104060821359_Enum.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104061407598_lates.resx">
+      <DependentUpon>202104061407598_lates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104071313527_Userroles.resx">
+      <DependentUpon>202104071313527_Userroles.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

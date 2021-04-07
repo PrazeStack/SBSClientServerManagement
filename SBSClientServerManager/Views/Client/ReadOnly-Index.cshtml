@@ -30,15 +30,8 @@
                     "columns": [
                         { "data": "Name", "name": "Name", "autoWidth": true },
                          
-                         {
-                            "data": "Edit", "name":"Edit" , "autoWidth": true ,
-                            "render": function (data, type, full, meta) {
-                                return "<button type='button' onclick=viewEditClient('" + full.Id + "') class='btn btn-sm btn-warning' data-toggle='modal' data-target='#EditClientModal'>Edit</button>";
-                                
-                            }
 
 
-                        }, 
                          {
                             "data": "Details", "name":"Details" , "autoWidth": true ,
                             "render": function (data, type, full, meta) {
@@ -47,15 +40,7 @@
 
 
                         }, 
-                       {
-                            "data": "Delete", "name":"Delete" , "autoWidth": true ,
-                            "render": function (data, type, full, meta) {
-                                return "<button type='button' onclick=Delete('" + full.Id + "') class='btn btn-sm btn-danger' data-toggle='modal' data-target='#DeleteClientModal'>Delete</button>";
-                                
-                            }
-
-
-                        },
+                     
                        
 
                     ]
@@ -78,29 +63,7 @@
                 })
             }
 
-            function viewEditClient(clientId) {
-                var url = "/client/edit?id=" + clientId;
-
-                $("#EditClientModalBody").load(url, function () {
-
-
-                })
-            }
-
-                function Delete(clientId) {
-
-                    $("#ConfirmDelete").click(function () {
-                        $.ajax('/client/delete?id=', {
-                            type: 'POST',
-                            data: { id: clientId },
-                            success: function () {
-                                window.location.href = "/client/index";
-
-                            }
-                        }
-                        )
-                    })
-                }
+         
         </script>
     </head>
 
@@ -150,41 +113,7 @@ else
         </div>
     </div>
 
-    <!--Edit client Modal-->
-    <div class="modal fade" id="EditClientModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title">Edit Client Details</h3>
-
-                </div>
-                <div class="modal-body" id="EditClientModalBody">
-
-                </div>
-
-            </div>
-        </div>
-    </div>
-    <!--Delete Client Modal-->
-    <div class="modal fade" id="DeleteClientModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Delete Client</h5>
-
-                </div>
-                <div class="modal-body" id="DeleteClientModalBody">
-                    <h4>Are you sure you want to Delete this Client form Database?</h4>
-                </div>
-                <div class="modal-footer">
-                    <button type="button"  class="btn btn-danger" id="ConfirmDelete">Yes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                </div>
-
-            </div>
-        </div>
-    </div>
-
+  
 
     <button type="button" onclick="viewAddClient()" class="btn btn-primary" data-toggle="modal" data-target="#AddClientModal">
         Add New Client
@@ -195,10 +124,9 @@ else
 
             <tr class="btn-primary">
                 
-                <th>Client Name</th>
-                <th>Edit</th> 
+                <th>Client Name</th> 
                 <th>Details</th>
-                <th>Delete</th>
+                
             </tr>
             </thead>
         <tbody class="clientTableBody" >

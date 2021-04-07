@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using SBSClientServerManager.Helper;
 using SBSClientServerManager.Models;
 using SBSClientServerManager.Models.ViewModels;
 using System;
@@ -40,6 +41,8 @@ namespace SBSClientServerManager.Controllers
             if (!ModelState.IsValid)
                 return RedirectToAction("Add", vpndata);
 
+            var password = EncryptionHelper.EncryptStringAES(vpndata.Password);
+            vpndata.Password = password;
 
             var newvpn = Mapper.Map<VPN>(vpndata);
             _context.VPNs.Add(newvpn);
@@ -51,6 +54,8 @@ namespace SBSClientServerManager.Controllers
         public ActionResult Edit(int id)
         {
             var vpninDb = _context.VPNs.FirstOrDefault(c => c.Id == id);
+            var password = EncryptionHelper.DecryptStringAES(vpninDb.Password);
+            vpninDb.Password = password;
             var viewModel = Mapper.Map<VpnFormViewModel>(vpninDb);
             return PartialView("_EditVpn", viewModel);
 
@@ -60,9 +65,10 @@ namespace SBSClientServerManager.Controllers
         public ActionResult Edit(VpnFormViewModel vpnUpdate)
         {
             if (!ModelState.IsValid)
-            {
-
-            }
+                return RedirectToAction("Edit", vpnUpdate);
+           
+            var password = EncryptionHelper.EncryptStringAES(vpnUpdate.Password);
+            vpnUpdate.Password = password;
 
             var serverinDb = _context.VPNs.Single(c => c.Id == vpnUpdate.Id);
             Mapper.Map(vpnUpdate, serverinDb);
@@ -84,6 +90,16 @@ namespace SBSClientServerManager.Controllers
                 _context.SaveChanges();
                 return RedirectToAction("Details", "Client", new { id = vpn.ClientId });
             }
+
+        }
+
+        public ActionResult View(int id)
+        {
+            var vpninDb = _context.VPNs.FirstOrDefault(c => c.Id == id);
+            var password = EncryptionHelper.DecryptStringAES(vpninDb.Password);
+            vpninDb.Password = password;
+            var viewModel = Mapper.Map<VpnFormViewModel>(vpninDb);
+            return PartialView("_ViewVpn", viewModel);
 
         }
     }

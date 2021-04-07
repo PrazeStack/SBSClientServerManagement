@@ -25,6 +25,7 @@ namespace SBSClientServerManager.Models
         public Client Client { get; set; }
         [Required]
         public int ClientId { get; set; }
-       
+      
+
     }
 }

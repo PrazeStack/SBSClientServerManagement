@@ -12,6 +12,7 @@ namespace SBSClientServerManager.Models.ViewModels
 
         [Required]
         [StringLength(255)]
+        [RegularExpression(@"^(([a-zA-Z]+[\s]{1}[A-Za-z]+)|([A-Za-z]+))$", ErrorMessage ="Name is Invalid")]
         public string Name { get; set; }
 
     }

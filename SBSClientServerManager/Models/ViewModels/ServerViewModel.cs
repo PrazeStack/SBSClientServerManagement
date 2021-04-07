@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -21,5 +23,6 @@ namespace SBSClientServerManager.Models.ViewModels
         public int ServerTypeId { get; set; }
         public int ClientId { get; set; }
         public ServerType ServerTypeName { get; set; }
+       
     }
 }
