@@ -20,21 +20,21 @@
                     "targets": [1, 2, 3, 4,5],
                     "orderable": false
                 }],
-               
+
                 "ajax": {
-                    "url": '/Client/GetServersList?Id=@Model.Id',
+                    "url": '@Url.Action("GetServersList","Client", new { Id = @Model.Id})',
                     "type": 'GET',
                     "datatype": "json"
                 },
 
-               
 
-                
+
+
 
                 "columns": [
                     { "data": "Ip", "name": "ID", "autoWidth": true },
                     { "data": "Username", "name": "Username", "autoWidth": true },
-                  
+
                 /* { "data": "ServerTypeName", "name": "Server Type", "autoWidth": true },*/
                     {
                         "data": "ServerTypeName", "name": "Server Type", "autoWidth": true,
@@ -88,10 +88,10 @@
                     "targets": [1, 2, 3,4],
                     "orderable": false
                 }],
-                
-                
+
+
                 "ajax": {
-                    "url": '/Client/GetVpnList?Id=@Model.Id',
+                    "url": '@Url.Action("GetVpnList","Client", new { Id = @Model.Id})',
                     "type": 'GET',
                     "datatype": "json"
                 },
@@ -139,16 +139,16 @@
             })
             $('#sqlTable').DataTable({
 
-                
+
 
                 "columnDefs": [{
                     "targets": [1,2,3,4],
                     "orderable": false
                 }],
-                
 
-            "ajax": {
-                "url": '/Client/GetSqlList?Id=@Model.Id',
+
+                "ajax": {
+                "url": '@Url.Action("GetSqlList","Client", new { Id = @Model.Id})',
                 "type": 'GET',
                 "datatype": "json"
             },
@@ -204,7 +204,7 @@
 
 
 
-            var url = "/server/add?clientId=" + clientId;
+            var url = '@Url.Action("Add", "Server")' + '?clientId=' + clientId;
 
             $("#AddServerModalBody").load(url, function () {
 
@@ -216,7 +216,7 @@
 
         function AddSqlServer(clientId) {
 
-            var url = "/sql/add?clientId=" + clientId;
+            var url = '@Url.Action("Add", "SQL")' + '?clientId=' + clientId;
 
             $("#AddSqlServerModalBody").load(url, function () {
 
@@ -225,7 +225,7 @@
         }
         function AddVpnServer(clientId) {
 
-            var url = "/vpn/add?clientId=" + clientId;
+            var url = '@Url.Action("Add", "VPN")' + '?clientId=' + clientId;
 
             $("#AddVpnServerModalBody").load(url, function () {
 
@@ -234,7 +234,7 @@
         }
 
         function viewEditServer(serverId) {
-            var url = "/server/edit?id=" + serverId;
+            var url ='@Url.Action("Edit", "Server")' + '/' + serverId;
 
             $("#EditServerModalBody").load(url, function () {
 
@@ -244,7 +244,7 @@
 
         }
         function viewServer(serverId) {
-            var url = "/server/view?id=" + serverId;
+            var url = '@Url.Action("View", "Server")' + '/' + serverId;
 
             $("#ViewServerModalBody").load(url, function () {
 
@@ -254,7 +254,7 @@
 
         }
         function viewEditSqlServer(sqlserverId) {
-            var url = "/sql/edit?id=" + sqlserverId;
+            var url ='@Url.Action("Edit", "SQL")' + '/'+ sqlserverId;
 
             $("#EditSqlServerModalBody").load(url, function () {
 
@@ -265,7 +265,7 @@
 
         }
         function viewSqlServer(sqlserverId) {
-            var url = "/sql/view?id=" + sqlserverId;
+            var url = '@Url.Action("View", "SQL")' + '/' + sqlserverId;
 
             $("#ViewSqlServerModalBody").load(url, function () {
 
@@ -276,20 +276,20 @@
 
         }
         function viewEditVpnServer(vpnserverId) {
-            var url = "/vpn/edit?id=" + vpnserverId;
+            var url ='@Url.Action("Edit", "VPN")' + '/' + vpnserverId;
 
             $("#EditVpnServerModalBody").load(url, function () {
-               
+
 
             })
 
 
         }
         function viewVpnServer(vpnserverId) {
-            var url = "/vpn/view?id=" + vpnserverId;
+            var url = '@Url.Action("View", "VPN")' + '/'+ vpnserverId;
 
             $("#ViewVpnServerModalBody").load(url, function () {
-               
+
 
             })
 
@@ -298,12 +298,13 @@
         function DeleteServer(serverId, clientId) {
 
             $("#ConfirmDelete").click(function () {
-                $.ajax('/server/delete', {
+                $.ajax({
+                    url: '@Url.Action("Delete", "Server")'+ '/',
                     type: 'POST',
                     data: { id: serverId },
                     success: function () {
-
-                        window.location.href = "/client/details?id=" + clientId;
+                        var url = '@Url.Action("Details","Client")' ;
+                        window.location.href = url;
 
                     }
                 }
@@ -315,11 +316,14 @@
         function DeleteSql(sqlserverId, clientId) {
 
             $("#ConfirmSqlDelete").click(function () {
-                $.ajax('/sql/delete', {
+                $.ajax({
+                    url: '@Url.Action("Delete", "SQL")'+ '/',
                     type: 'POST',
                     data: { id: sqlserverId },
                     success: function () {
-                        window.location.href = "/client/details?id=" + clientId;
+
+                        var url = '@Url.Action("Details","Client")';
+                        window.location.href = url;
 
                     }
                 }
@@ -330,11 +334,13 @@
         function DeleteVpn(vpnserverId, clientId) {
 
             $("#ConfirmVpnDelete").click(function () {
-                $.ajax('/vpn/delete', {
+                $.ajax( {
+                    url: '@Url.Action("Delete", "VPN")'+ '/',
                     type: 'POST',
                     data: { id: vpnserverId },
                     success: function () {
-                        window.location.href = "/client/details?id=" + clientId;
+                         var url = '@Url.Action("Details","Client")';
+                        window.location.href = url;
 
                     }
                 }

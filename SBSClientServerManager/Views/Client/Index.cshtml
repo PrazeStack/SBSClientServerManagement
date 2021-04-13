@@ -20,7 +20,7 @@
                 $('#clientTable').DataTable({
 
                     "ajax": {
-                        "url": '/Client/GetClientList',
+                        "url":'@Url.Action("GetClientList", "Client")',
                         "type": 'GET',
                         "datatype": "json"
                     },
@@ -29,48 +29,48 @@
 
                     "columns": [
                         { "data": "Name", "name": "Name", "autoWidth": true },
-                         
+
                          {
                             "data": "Edit", "name":"Edit" , "autoWidth": true ,
-                            "render": function (data, type, full, meta) {
-                                return "<button type='button' onclick=viewEditClient('" + full.Id + "') class='btn btn-sm btn-warning' data-toggle='modal' data-target='#EditClientModal'>Edit</button>";
-                                
-                            }
+                            "render": function (data, type, customer, meta) {
+                                return "<button type='button' onclick=viewEditClient('" + customer.Id + "') class='btn btn-sm btn-warning' data-toggle='modal' data-target='#EditClientModal'>Edit</button>";
 
-
-                        }, 
-                         {
-                            "data": "Details", "name":"Details" , "autoWidth": true ,
-                            "render": function (data, type, full, meta) {
-                                return "<button onclick=window.location.href='/client/details?Id="+full.Id+"' class='btn btn-sm btn-info'>Details</button>";
-                            }
-
-
-                        }, 
-                       {
-                            "data": "Delete", "name":"Delete" , "autoWidth": true ,
-                            "render": function (data, type, full, meta) {
-                                return "<button type='button' onclick=Delete('" + full.Id + "') class='btn btn-sm btn-danger' data-toggle='modal' data-target='#DeleteClientModal'>Delete</button>";
-                                
                             }
 
 
                         },
-                       
+                         {
+                            "data": "Details", "name":"Details" , "autoWidth": true ,
+                            "render": function (data, type, customer, meta) {
+                                return "<button onclick=goToDetails(" + customer.Id +") class='btn btn-sm btn-info'>Details</button>";
+                            }
+
+
+                        },
+                       {
+                            "data": "Delete", "name":"Delete" , "autoWidth": true ,
+                           "render": function (data, type, customer, meta) {
+                               return "<button type='button' onclick=Delete('" + customer.Id + "') class='btn btn-sm btn-danger' data-toggle='modal' data-target='#DeleteClientModal'>Delete</button>";
+
+                            }
+
+
+                        },
+
 
                     ]
-                        
+
 
                 });
             })
-                           
-              
 
-                   
-            
+
+
+
+
 
             function viewAddClient() {
-                var url = "/client/add";
+                var url = '@Url.Action("add", "client")';
 
                 $("#AddClientModalBody").load(url, function () {
 
@@ -79,7 +79,7 @@
             }
 
             function viewEditClient(clientId) {
-                var url = "/client/edit?id=" + clientId;
+                var url = '@Url.Action("Edit", "Client")' + '/' + clientId;
 
                 $("#EditClientModalBody").load(url, function () {
 
@@ -87,14 +87,25 @@
                 })
             }
 
-                function Delete(clientId) {
+              function goToDetails(clientId) {
+
+
+                var url = '@Url.Action("Details", "Client")' + '/' + clientId;
+                window.location.href = url;
+
+               }
+
+              function Delete(clientId) {
 
                     $("#ConfirmDelete").click(function () {
-                        $.ajax('/client/delete?id=', {
+
+                        $.ajax({
+                            url: '@Url.Action("Delete", "Client")'+ '/',
                             type: 'POST',
                             data: { id: clientId },
                             success: function () {
-                                window.location.href = "/client/index";
+                                var url = '@Url.Action("Index","Client")';
+                                window.location.href = url;
 
                             }
                         }

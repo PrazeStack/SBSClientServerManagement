@@ -3,49 +3,117 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<head>
-    @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
-    @*<script src="~/Scripts/bootstrap.min.js"></script>*@
-    <script>
+    <head>
+        @*<script src="~/Scripts/jquery-3.3.1.min.js"></script>*@
+        @*<script src="~/Scripts/bootstrap.min.js"></script>*@
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-           
-        
-        function viewAddClient() {
-            var url = "/client/add";
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css"/>
 
-            $("#AddClientModalBody").load(url, function () {
-               
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
 
+
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $('#clientTable').DataTable({
+
+                    "ajax": {
+                        "url":'@Url.Action("GetClientList", "Client")',
+                        "type": 'GET',
+                        "datatype": "json"
+                    },
+
+
+
+                    "columns": [
+                        { "data": "Name", "name": "Name", "autoWidth": true },
+
+                         {
+                            "data": "Edit", "name":"Edit" , "autoWidth": true ,
+                            "render": function (data, type, customer, meta) {
+                                return "<button type='button' onclick=viewEditClient('" + customer.Id + "') class='btn btn-sm btn-warning' data-toggle='modal' data-target='#EditClientModal'>Edit</button>";
+
+                            }
+
+
+                        },
+                         {
+                            "data": "Details", "name":"Details" , "autoWidth": true ,
+                            "render": function (data, type, customer, meta) {
+                                return "<button onclick=goToDetails(" + customer.Id +") class='btn btn-sm btn-info'>Details</button>";
+                            }
+
+
+                        },
+                       {
+                            "data": "Delete", "name":"Delete" , "autoWidth": true ,
+                           "render": function (data, type, customer, meta) {
+                               return "<button type='button' onclick=Delete('" + customer.Id + "') class='btn btn-sm btn-danger' data-toggle='modal' data-target='#DeleteClientModal'>Delete</button>";
+
+                            }
+
+
+                        },
+
+
+                    ]
+
+
+                });
             })
-        }
 
-        function viewEditClient(clientId) {
-            var url = "/client/edit?id=" + clientId;
 
-            $("#EditClientModalBody").load(url, function () {
-               
 
-            })
-        }
-        function Delete(clientId) {
-            
-            $("#ConfirmDelete").click(function () {
-                $.ajax('/client/delete?id=', {
-                    type: 'POST',
-                    data: { id: clientId },
-                    success: function () {
-                        window.location.href = "/client/index";
-                         
-                    }
-                }
-                )
+
+
+
+            function viewAddClient() {
+                var url = '@Url.Action("add", "client")';
+
+                $("#AddClientModalBody").load(url, function () {
+
+
+                })
             }
-            )
-        }
-          
 
-/**/</script>
-</head>
+            function viewEditClient(clientId) {
+                var url = '@Url.Action("Edit", "Client")' + '/' + clientId;
+
+                $("#EditClientModalBody").load(url, function () {
+
+
+                })
+            }
+
+              function goToDetails(clientId) {
+
+
+                var url = '@Url.Action("Details", "Client")' + '/' + clientId;
+                window.location.href = url;
+
+               }
+
+              function Delete(clientId) {
+
+                    $("#ConfirmDelete").click(function () {
+
+                        $.ajax({
+                            url: '@Url.Action("Delete", "Client")'+ '/',
+                            type: 'POST',
+                            data: { id: clientId },
+                            success: function () {
+                                var url = '@Url.Action("Index","Client")';
+                                window.location.href = url;
+
+                            }
+                        }
+                        )
+                    })
+                }
+        </script>
+    </head>
 
 
 
@@ -69,10 +137,7 @@
 
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
+              
             </div>
         </div>
     </div>
@@ -136,16 +201,19 @@ else
         Add New Client
     </button>
 
-    <table class="table table-hover table-bordered ">
+    <table id="clientTable" class="table">
         <thead>
 
             <tr class="btn-primary">
-                <th>S/N</th>
+                
                 <th>Client Name</th>
-                <th>Action</th>
+                <th>Edit</th> 
+                <th>Details</th>
+                <th>Delete</th>
             </tr>
-        <tbody>
-            @{ int num = 1;}
+            </thead>
+        <tbody class="clientTableBody" >
+            @*@{ int num = 1;}
             @foreach (var client in Model)
             {
                 <tr>
@@ -154,14 +222,13 @@ else
                     <td>
                         <div>
                             <button onclick="window.location.href='/client/details?Id=@client.Id'" class="btn btn-info">Details</button>
-                            <button type="button" onclick="viewEditClient(@client.Id)" class="btn btn-warning" data-toggle="modal" data-target="#EditClientModal">Edit</button>
-                            <button type="button" onclick="Delete(@client.Id)" class="btn btn-danger" data-toggle="modal" data-target="#DeleteClientModal">Delete</button>
+                           
                             </div>
 
                     </td>
                 </tr>
                 num++;
-            }
+            }*@
         </tbody>
     </table>
 

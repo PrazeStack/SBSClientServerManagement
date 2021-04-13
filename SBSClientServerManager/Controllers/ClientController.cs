@@ -136,7 +136,7 @@ namespace SBSClientServerManager.Controllers
                 var newclient = Mapper.Map<Client>(clientdata);
                 _context.Clients.Add(newclient);
                 _context.SaveChanges();
-                var clientId = newclient.Id;
+                //var clientId = newclient.Id;
                 return RedirectToAction("Index");
 
         }

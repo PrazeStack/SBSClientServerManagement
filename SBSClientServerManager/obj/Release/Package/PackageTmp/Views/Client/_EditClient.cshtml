@@ -9,7 +9,7 @@
 </script>
 @using (@Html.BeginForm("Edit", "Client", FormMethod.Post))
 {
-
+    
     <div class="form-group">
         @Html.LabelFor(c => c.Name)
         @Html.TextBoxFor(c => c.Name, new { @class = "form-control" , @Value = Model.Name })

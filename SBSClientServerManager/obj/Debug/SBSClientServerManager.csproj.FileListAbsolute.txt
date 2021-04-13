@@ -80,7 +80,6 @@ C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\bin\Mi
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\bin\Microsoft.Owin.Security.OAuth.xml
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.csprojAssemblyReference.cache
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.Migrations.AddClientTable.resources
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.Migrations.AddServerTable.resources
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.Migrations.AddServerTypeAndRelateToServer.resources
@@ -98,3 +97,8 @@ C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\De
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.csproj.CopyComplete
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.dll
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.pdb
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.Migrations.Enum.resources
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.csprojAssemblyReference.cache
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.Migrations.lates.resources
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.Migrations.Userroles.resources
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Debug\SBSClientServerManager.Migrations.UpdateSQLserver.resources

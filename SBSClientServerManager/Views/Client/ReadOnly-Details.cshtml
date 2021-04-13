@@ -22,7 +22,7 @@
                 //}],
 
                 "ajax": {
-                    "url": '/Client/GetServersList?Id=@Model.Id',
+                    "url": '@Url.Action("GetServersList","Client", new { Id = @Model.Id})',
                     "type": 'GET',
                     "datatype": "json"
                 },
@@ -45,13 +45,13 @@
                                 return '<td>Live</td>';
                         }
 
-                        
+
 
                     }
 
-                    
 
-                   
+
+
                     ]
 
 
@@ -71,7 +71,7 @@
 
 
                     "ajax": {
-                        "url": '/Client/GetVpnList?Id=@Model.Id',
+                        "url": '@Url.Action("GetVpnList","Client", new { Id = @Model.Id})',
                         "type": 'GET',
                         "datatype": "json"
                     },
@@ -98,7 +98,7 @@
 
 
                     "ajax": {
-                        "url": '/Client/GetSqlList?Id=@Model.Id',
+                        "url": '@Url.Action("GetSqlList","Client", new { Id = @Model.Id})',
                         "type": 'GET',
                         "datatype": "json"
                     },
@@ -119,25 +119,23 @@
 
         });
 
-
-
-        function AddServer(clientId) {
+          function AddServer(clientId) {
 
 
 
-            var url = "/server/add?clientId=" + clientId;
+            var url = '@Url.Action("Add", "Server")' + '?clientId=' + clientId;
 
             $("#AddServerModalBody").load(url, function () {
 
 
             })
 
-        }
+          }
 
 
         function AddSqlServer(clientId) {
 
-            var url = "/sql/add?clientId=" + clientId;
+            var url = '@Url.Action("Add", "SQL")' + '?clientId=' + clientId;
 
             $("#AddSqlServerModalBody").load(url, function () {
 
@@ -146,7 +144,7 @@
         }
         function AddVpnServer(clientId) {
 
-            var url = "/vpn/add?clientId=" + clientId;
+            var url = '@Url.Action("Add", "VPN")' + '?clientId=' + clientId;
 
             $("#AddVpnServerModalBody").load(url, function () {
 
@@ -154,123 +152,7 @@
             })
         }
 
-        function viewEditServer(serverId) {
-            var url = "/server/edit?id=" + serverId;
-
-            $("#EditServerModalBody").load(url, function () {
-
-            })
-
-
-
-        }
-        function viewServer(serverId) {
-            var url = "/server/view?id=" + serverId;
-
-            $("#ViewServerModalBody").load(url, function () {
-
-            })
-
-
-
-        }
-        function viewEditSqlServer(sqlserverId) {
-            var url = "/sql/edit?id=" + sqlserverId;
-
-            $("#EditSqlServerModalBody").load(url, function () {
-
-
-            })
-
-
-
-        }
-        function viewSqlServer(sqlserverId) {
-            var url = "/sql/view?id=" + sqlserverId;
-
-            $("#ViewSqlServerModalBody").load(url, function () {
-
-
-            })
-
-
-
-        }
-        function viewEditVpnServer(vpnserverId) {
-            var url = "/vpn/edit?id=" + vpnserverId;
-
-            $("#EditVpnServerModalBody").load(url, function () {
-               
-
-            })
-
-
-        }
-        function viewVpnServer(vpnserverId) {
-            var url = "/vpn/view?id=" + vpnserverId;
-
-            $("#ViewVpnServerModalBody").load(url, function () {
-               
-
-            })
-
-
-        }
-        function DeleteServer(serverId, clientId) {
-
-            $("#ConfirmDelete").click(function () {
-                $.ajax('/server/delete', {
-                    type: 'POST',
-                    data: { id: serverId },
-                    success: function () {
-
-                        window.location.href = "/client/details?id=" + clientId;
-
-                    }
-                }
-                )
-            }
-            )
-        }
-
-        function DeleteSql(sqlserverId, clientId) {
-
-            $("#ConfirmSqlDelete").click(function () {
-                $.ajax('/sql/delete', {
-                    type: 'POST',
-                    data: { id: sqlserverId },
-                    success: function () {
-                        window.location.href = "/client/details?id=" + clientId;
-
-                    }
-                }
-                )
-            }
-            )
-        }
-        function DeleteVpn(vpnserverId, clientId) {
-
-            $("#ConfirmVpnDelete").click(function () {
-                $.ajax('/vpn/delete', {
-                    type: 'POST',
-                    data: { id: vpnserverId },
-                    success: function () {
-                        window.location.href = "/client/details?id=" + clientId;
-
-                    }
-                }
-                )
-            }
-            )
-
-        }
-
-
-
-
-
-
-/**/</script>
+        /**/</script>
 
     
 </head>

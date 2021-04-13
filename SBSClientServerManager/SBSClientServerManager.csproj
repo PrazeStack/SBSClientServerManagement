@@ -242,6 +242,10 @@
     <Compile Include="Migrations\202104071313527_Userroles.Designer.cs">
       <DependentUpon>202104071313527_Userroles.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202104130933224_UpdateSQLserver.cs" />
+    <Compile Include="Migrations\202104130933224_UpdateSQLserver.Designer.cs">
+      <DependentUpon>202104130933224_UpdateSQLserver.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Client.cs" />
@@ -279,6 +283,7 @@
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
     <None Include="Properties\PublishProfiles\AdegbitePraiseSBS-Project1 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -401,6 +406,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202104071313527_Userroles.resx">
       <DependentUpon>202104071313527_Userroles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202104130933224_UpdateSQLserver.resx">
+      <DependentUpon>202104130933224_UpdateSQLserver.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

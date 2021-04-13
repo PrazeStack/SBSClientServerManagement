@@ -98,3 +98,7 @@ C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Re
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Release\SBSClientServerManager.csproj.CopyComplete
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Release\SBSClientServerManager.dll
 C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Release\SBSClientServerManager.pdb
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Release\SBSClientServerManager.Migrations.Enum.resources
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Release\SBSClientServerManager.Migrations.lates.resources
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Release\SBSClientServerManager.Migrations.Userroles.resources
+C:\Users\adegs\source\repos\SBSClientServerManager\SBSClientServerManager\obj\Release\SBSClientServerManager.Migrations.UpdateSQLserver.resources
